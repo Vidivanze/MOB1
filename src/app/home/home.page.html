@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-title>
+      Vedjiz
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="auth-form">
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-button [routerLink]="['/register']" expand="block" color="primary">S'enregistrer</ion-button>
 
+        <span class="divider line one-line">ou</span>
+
+        <span class="already">Déjà enregistré ?</span>
+
+        <ion-button [routerLink]="['/login']" expand="block" color="danger">Se connecter</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

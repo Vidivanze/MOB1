@@ -1,9 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>shop</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Les vedjiz</ion-title>
   </ion-toolbar>
 </ion-header>
-
+ 
 <ion-content>
-
+  
+  <ion-list>
+ 
+    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'shop', item.imdbID]">
+      <ion-avatar slot="start">
+        <img [src]="item.picture" *ngIf="item.picture != 'N/A'">
+      </ion-avatar>
+ 
+      <ion-label text-wrap>
+        <h3>{{ item.name }}</h3>
+        {{ item.price }}
+      </ion-label>
+ 
+    </ion-item>
+ 
+  </ion-list>
+ 
 </ion-content>

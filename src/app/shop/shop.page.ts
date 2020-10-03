@@ -1,4 +1,6 @@
+import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-shop',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopPage implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  results: Observable<any>;
+  searchTerm: string = '';
+  
+  /**
+   * Constructor of our first page
+   * @param apiService The api Service to get data
+   */
+  constructor(private apiService: ApiService) { }
+ 
+  ngOnInit() { }
+ 
+  searchChanged() {
+    // Call our service function which returns an Observable
+    this.results = this.apiService.getProducts();
   }
 
 }

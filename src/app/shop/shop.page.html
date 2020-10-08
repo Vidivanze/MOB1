@@ -4,22 +4,15 @@
   </ion-toolbar>
 </ion-header>
  
-<ion-content>
+<ion-content class="ion-padding" >
+  <ion-grid style="margin-top: 60px;">
+   
+      <ion-item *ngFor="let data of Datas.stock" button (click)="details(data)">
+        <ion-label>
+          {{data.name}}
+        </ion-label>
+        <ion-note slot="end" color="primary">{{data.stock}} Pièces {{ data.price }} CHF</ion-note>
+      </ion-item>
   
-  <ion-list>
- 
-    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'shop', item.imdbID]">
-      <ion-avatar slot="start">
-        <img [src]="item.picture" *ngIf="item.picture != 'N/A'">
-      </ion-avatar>
- 
-      <ion-label text-wrap>
-        <h3>{{ item.name }}</h3>
-        {{ item.price }}
-      </ion-label>
- 
-    </ion-item>
- 
-  </ion-list>
- 
+  </ion-grid>
 </ion-content>

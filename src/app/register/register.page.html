@@ -5,26 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <form>
-    <ion-item lines="full">
-      <ion-label position="floating">Prénom</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Prénom</ion-label>
+    <ion-input type="text" [(ngModel)]="firstname" required ></ion-input>
+  </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Nom</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Nom</ion-label>
+    <ion-input type="text" [(ngModel)]="lastname" required></ion-input>
+  </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Numéro de téléphone</ion-label>
-      <ion-input type="number" required></ion-input>
-    </ion-item>
-
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block">Envoyer</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+  <ion-item lines="full">
+    <ion-label position="floating">Numéro de téléphone</ion-label>
+    <ion-input type="number" [(ngModel)]="phonenumber" required></ion-input>
+  </ion-item>
+  
+  <ion-row>
+    <ion-col>
+      <ion-button color="success" expand="block" (click)="newUser()">Envoyer</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

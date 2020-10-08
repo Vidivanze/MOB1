@@ -13,6 +13,7 @@ export class DataProvider {
 
   constructor(private http: HttpClient, private storage: Storage){}
 
+  //Load Data
   public loadFromAPI(): Promise<any>
   {
     return new Promise<any> ( (resolve, reject) => {
@@ -26,4 +27,14 @@ export class DataProvider {
       )
     })
   }
+
+  //Register
+  public registerToAPI(firstname, lastname, phonenumber){    
+    this.http.post(this.apiurl+"/user/apply", {
+      firstname,
+      lastname,
+      phonenumber
+    })
+  }
+
 }

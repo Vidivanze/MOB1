@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>account</ion-title>
+  <ion-toolbar color="#00a65a">
+    <ion-title>Compte</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-row>
+    <ion-col>
+      <p>Bonjour {{Datas.user.firstname}} {{Datas.user.lastname}}</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button color="danger" expand="block" (click)="logout()">se déconnecter</ion-button>
+    </ion-col>
+  </ion-row>
 
 </ion-content>

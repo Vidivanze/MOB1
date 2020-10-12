@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { DataProvider } from '../providers/data';
 
 @Component({
   selector: 'app-account',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountPage implements OnInit {
 
-  constructor() { }
+  Alldatas: any;
+  private Datas: DataProvider;
+
+  constructor(private auth: AuthService, data:DataProvider) { 
+    this.Datas = data;
+    this.Alldatas = this.Datas.user;
+  }
 
   ngOnInit() {
+    this.Datas.getMe();
+  }
+
+  logout(){
+    this.auth.signOut();
   }
 
 }

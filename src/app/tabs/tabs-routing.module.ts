@@ -24,9 +24,12 @@ const routes: Routes = [
         loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
       },
       {
-        path: '',
-        redirectTo: '/tabs/home',
-        pathMatch: 'full'
+        path: 'register',
+        loadChildren: () => import('../register/register.module').then(m => m.RegisterPageModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule)
       }
     ]
   },
@@ -34,6 +37,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/home',
     pathMatch: 'full'
+  },
+  {
+    path: '/tabs/register',
+    loadChildren: () => import('../register/register.module').then(m => m.RegisterPageModule)
   }
 ];
 

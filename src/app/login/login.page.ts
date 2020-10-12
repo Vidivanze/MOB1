@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { DataProvider } from '../providers/data';
 import { Router } from '@angular/router';
 import { NullTemplateVisitor } from '@angular/compiler';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,8 @@ import { NullTemplateVisitor } from '@angular/compiler';
 export class LoginPage implements OnInit {
 
   private token: String;
- 
 
-  constructor(private router: Router, private toaster: ToastController, private storage: Storage) {
+  constructor(private router: Router, private toaster: ToastController, private storage: Storage, private auth: AuthService) {
 
   }
 
@@ -24,8 +24,10 @@ export class LoginPage implements OnInit {
 
 
   //add token to storage
-  addToken(){
+  login(){
     this.storage.set('token', this.token);
+    this.auth.signIn();
+    this.token = null;
   }
 
 }

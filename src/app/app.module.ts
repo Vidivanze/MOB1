@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/
 import { ApiInterceptor } from './interceptor/ApiInterceptor';
 import { IonicStorageModule } from '@ionic/storage';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,7 +25,8 @@ import { IonicStorageModule } from '@ionic/storage';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     DataProvider,
-    HttpClient
+    HttpClient,
+    Headers
   ],
   bootstrap: [AppComponent]
 })

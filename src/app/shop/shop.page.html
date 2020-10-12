@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Les vedjiz</ion-title>
+  <ion-toolbar color="#00a65a">
+    <ion-title>Les fruits et légumes</ion-title>
   </ion-toolbar>
 </ion-header>
  
@@ -8,6 +8,7 @@
   <ion-grid style="margin-top: 60px;">
    
       <ion-item *ngFor="let data of Datas.stock" button (click)="details(data)">
+        <img src="http://localhost:8000/storage/pictures/{{data.picture}}" height='35' width='35'>
         <ion-label>
           {{data.name}}
         </ion-label>

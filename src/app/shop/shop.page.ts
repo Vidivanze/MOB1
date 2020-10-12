@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProvider } from '../providers/data';
 import { Router } from '@angular/router';
-import { debug } from 'console';
 import { Route } from '@angular/compiler/src/core';
 
 @Component({

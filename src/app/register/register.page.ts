@@ -3,7 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { DataProvider } from '../providers/data';
 import { Router } from '@angular/router';
-import { NullTemplateVisitor } from '@angular/compiler';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -12,46 +12,74 @@ import { NullTemplateVisitor } from '@angular/compiler';
 })
 export class RegisterPage implements OnInit {
 
-  private firstname: String;
-  private lastname: String;
-  private phonenumber: String;
-  
-  private Datas: DataProvider;
+  private apiurl = "http://127.0.0.1:8000/api";
 
-  constructor(private router: Router, private toaster: ToastController, private storage: Storage, dataProvider: DataProvider) {
-    this.Datas = dataProvider;
+  private firstname: String = "";
+  private lastname: String = "";
+  private phonenumber: String = "";
+
+  
+
+  constructor(private router: Router, private toaster: ToastController, private storage: Storage, private dataProvider: DataProvider, private http: HttpClient) {
+    
   }
 
   ngOnInit() {
   }
 
-  newUser(){
-    //If fields are empty
-    if(this.firstname == null || this.lastname == null || this.phonenumber == null || this.firstname == "" || this.lastname == "" || this.phonenumber == ""){
-      //Toast notification
-      this.toaster.create({
-          message: "Veuillez remplir tous les champs",
-          duration : 2000,
-        }).then(toast => {
-          toast.present();
-        });
-    
-    }else{
-      //Register user
-      this.storage.set("firstname", this.firstname);
-      this.storage.set("lastname", this.lastname);
-      this.storage.set("phonenumber", this.phonenumber);
+  signUp(){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
 
-      this.Datas.registerToAPI(this.firstname, this.lastname, this.phonenumber);
-
-
-      //Success notification
-      this.toaster.create({
-        message: "Vous êtes enregistré "+this.firstname+" "+this.lastname+" !",
-        duration: 2000,
-      }).then(toast => {
-        toast.present();
-      })
+    let options = {
+      headers: headers
     }
+
+    let erreur = "";
+
+    let data = {
+      "firstname": this.firstname,
+      "lastname": this.lastname,
+      "phonenumber": this.phonenumber,
+    }
+
+    console.log(this.firstname)
+    
+    this.http.post(this.apiurl+'/user/apply', data, options)
+    .subscribe(
+      data => {
+        this.toaster.create({
+          message: 'Inscription validée ! Vous allez recevoir un sms contenant votre token !',
+          duration: 2500,
+          color: 'success'
+        }).then(toast => {
+          toast.present()
+        });
+        this.router.navigate(['/tabs/home']);
+      },
+      err => {
+        //If fields are empty
+        if(this.firstname == "" || this.lastname == "" || this.phonenumber == ""){
+          //Notification
+          this.toaster.create({  
+            message: "Veuillez remplir tous les champs",
+            duration: 2000,
+            color: 'danger'
+          }).then(toast => {
+            toast.present()
+          });
+        }else{
+          //Notification
+          this.toaster.create({  
+            message: err.error,
+            duration: 2000,
+            color: 'danger'
+          }).then(toast => {
+            toast.present()
+          });
+        } 
+      }
+    )
   }
 }

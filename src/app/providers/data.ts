@@ -9,8 +9,9 @@ export class DataProvider {
   
   private apiurl = "http://127.0.0.1:8000/api";
 
-  public stock = []
-  public user = []
+  public stock = [];
+  public user = [];
+  public userBalance;
 
   constructor(private http: HttpClient, private storage: Storage, private toaster: ToastController){}
 
@@ -30,7 +31,6 @@ export class DataProvider {
   }
 
 
-
   //Return user informations
   public getMe(): Promise<any> {
     return new Promise<any> ( (resolve, reject) => {
@@ -39,6 +39,26 @@ export class DataProvider {
           this.user = response['data'];
           console.log(this.user);
           resolve(this.user);
+        },
+        err => {
+          this.toaster.create({
+            message: 'Votre token est invalide. Veuillez réessayer !',
+            duration: 4000,
+            color: 'danger'
+          }).then(toast => {toast.present()})
+          this.storage.remove('token');
+        }
+      );
+    })
+  }
+
+  //Return user balance
+  public getBalance(): Promise<any> {
+    return new Promise<any> ( (resolve, reject) => {
+      this.http.get(this.apiurl+"/me/balance").subscribe(
+        response => {
+          this.userBalance = response;
+          resolve(response);
         },
         err => {
           this.toaster.create({

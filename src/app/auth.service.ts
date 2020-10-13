@@ -10,7 +10,7 @@ import { SelectValueAccessor, ToastController } from '@ionic/angular';
 export class AuthService {
 
   //User auth status
-  public isLogedIn: Boolean = false;
+  public isLogedIn: Boolean;
 
   private token;
 

@@ -1,8 +1,8 @@
   
 import { Component, OnInit } from '@angular/core';
 import { DataProvider } from '../providers/data';
-import { Router } from '@angular/router';
-import { Route } from '@angular/compiler/src/core';
+import { Router, NavigationExtras } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-shop',
@@ -12,7 +12,7 @@ import { Route } from '@angular/compiler/src/core';
 export class ShopPage implements OnInit {
   Alldatas: any;
   private Datas: DataProvider;
-  constructor(data:DataProvider, private router : Router) {
+  constructor(data:DataProvider, private router : Router, private auth: AuthService) {
     this.Datas = data;
     this.Alldatas = this.Datas.stock;
   }
@@ -21,8 +21,16 @@ export class ShopPage implements OnInit {
     this.Datas.loadFromAPI();
    
   }
-  details(product){
-    this.router.navigateByUrl("details/",product)
+
+  //Product details
+  details(product){ 
+    let navigationExtras: NavigationExtras = {
+      state: {
+        product: product
+      }
+    };
+
+    this.router.navigate(['/tabs/details/'], navigationExtras);
   }
 
 }

@@ -9,16 +9,15 @@ import { DataProvider } from '../providers/data';
 })
 export class AccountPage implements OnInit {
 
-  Alldatas: any;
   private Datas: DataProvider;
 
   constructor(private auth: AuthService, data:DataProvider) { 
     this.Datas = data;
-    this.Alldatas = this.Datas.user;
   }
 
   ngOnInit() {
     this.Datas.getMe();
+    this.Datas.getBalance();
   }
 
   logout(){

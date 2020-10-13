@@ -6,13 +6,27 @@
 
 <ion-content>
   <ion-row>
-    <ion-col>
-      <p>Bonjour {{Datas.user.firstname}} {{Datas.user.lastname}}</p>
+    <ion-col size="10">
+      <h3>Bonjour {{Datas.user.firstname}} {{Datas.user.lastname}}</h3>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="10">
+      Votre balance :
+    </ion-col>
+  </ion-row>
+  
+  <ion-row>
+    <ion-col size="10" offset="1">
+      Débit : {{Datas.userBalance.debit}} <br>
+      Crédit : {{Datas.userBalance.credit}}
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col>
+      <br>
       <ion-button color="danger" expand="block" (click)="logout()">se déconnecter</ion-button>
     </ion-col>
   </ion-row>

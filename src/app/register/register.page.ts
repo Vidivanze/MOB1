@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { DataProvider } from '../providers/data';
 import { Router } from '@angular/router';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterPage implements OnInit {
 
   
 
-  constructor(private router: Router, private toaster: ToastController, private storage: Storage, private dataProvider: DataProvider, private http: HttpClient) {
+  constructor(private router: Router, private toaster: ToastController, private storage: Storage, private dataProvider: DataProvider, private http: HttpClient, private auth: AuthService) {
     
   }
 

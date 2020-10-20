@@ -1,18 +1,18 @@
 <ion-header>
   <ion-toolbar color="#00a65a">
-    <ion-title>Les fruits et légumes</ion-title>
+    <ion-title>Les cagettes</ion-title>
   </ion-toolbar>
 </ion-header>
  
 <ion-content class="ion-padding" >
   <ion-grid style="margin-top: 60px;">
    
-      <ion-item *ngFor="let data of Datas.stock" button (click)="details(data)">
-        <img src="http://localhost:8000/storage/pictures/{{data.picture}}" height='35' width='35'>
+      <ion-item *ngFor="let product of shopList" button (click)="details(product)">
+        <img src="http://localhost:8000/storage/pictures/{{product.picture}}" height='35' width='35' style="margin-right: 2px;">
         <ion-label>
-          {{data.name}}
+          {{product.name}}
         </ion-label>
-        <ion-note slot="end" color="primary">{{data.stock}} Pièces {{ data.price }} CHF</ion-note>
+        <ion-note slot="end" color="primary">{{product.stock}} Pièces {{ product.price }} CHF</ion-note>
       </ion-item>
   
   </ion-grid>

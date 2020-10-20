@@ -11,7 +11,7 @@ export class AccountPage implements OnInit {
 
   private Datas: DataProvider;
 
-  constructor(private auth: AuthService, data:DataProvider) { 
+  constructor(private auth: AuthService, private data:DataProvider) { 
     this.Datas = data;
   }
 

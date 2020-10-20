@@ -9,19 +9,19 @@ export class DataProvider {
   
   private apiurl = "http://127.0.0.1:8000/api";
 
-  public stock = [];
+  public products = [];
   public user = [];
   public userBalance;
 
   constructor(private http: HttpClient, private storage: Storage, private toaster: ToastController){}
 
-  //Load Data
-  public loadFromAPI(): Promise<any>
-  {
+  //Returns products datas
+  public getProducts(): Promise<any> {
     return new Promise<any> ( (resolve, reject) => {
       this.http.get(this.apiurl+'/products').subscribe(
         response => {
-          this.stock = response['data'];
+          this.products = response['data'];
+          resolve(this.products);
         },
         err => {
           console.log('API failed with code '+err.status)
@@ -30,8 +30,20 @@ export class DataProvider {
     })
   }
 
+  //Returns product by his id
+  public findProductById(id){
+    return new Promise<any>((resolve, reject) => {
+      this.products.forEach((product) =>{  
+        if (product.id == id) {
+          resolve(product);
+        }
+      })
+      reject('Product # ' + id + ' not found');
+    })
+  }
 
-  //Return user informations
+
+  //Returns user's informations
   public getMe(): Promise<any> {
     return new Promise<any> ( (resolve, reject) => {
       this.http.get(this.apiurl+"/me").subscribe(
@@ -52,7 +64,7 @@ export class DataProvider {
     })
   }
 
-  //Return user balance
+  //Returns user's balance
   public getBalance(): Promise<any> {
     return new Promise<any> ( (resolve, reject) => {
       this.http.get(this.apiurl+"/me/balance").subscribe(
@@ -71,7 +83,5 @@ export class DataProvider {
       );
     })
   }
-
-  
 
 }

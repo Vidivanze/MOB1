@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { CartPage } from '../cart/cart.page';
 
 @Component({
   selector: 'app-shop-details',
@@ -10,7 +11,8 @@ import { AuthService } from '../auth.service';
 export class ShopDetailsPage implements OnInit {
   
   data: any;
-  
+  private cart: CartPage;
+
   constructor(private route: ActivatedRoute, private router: Router, private auth: AuthService) { 
     //
     this.route.queryParams.subscribe(params => {
@@ -23,4 +25,12 @@ export class ShopDetailsPage implements OnInit {
   ngOnInit() {
 
   }
+
+
+  addToCart(productId){
+    console.log(productId)
+    this.cart.addToCart(productId);
+    //Toast
+  }
+ 
 }

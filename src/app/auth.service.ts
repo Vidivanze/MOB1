@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   public signOut(){
-    this.storage.remove('token');
+    this.storage.clear();
     this.isLogedIn = false;
     console.log("déconnecté, -> isLogedIn = "+this.isLogedIn);
     this.router.navigate(['']);

@@ -19,7 +19,6 @@ export class RegisterPage implements OnInit {
   private lastname: String = "";
   private phonenumber: String = "";
 
-  
 
   constructor(private router: Router, private toaster: ToastController, private storage: Storage, private dataProvider: DataProvider, private http: HttpClient, private auth: AuthService) {
     

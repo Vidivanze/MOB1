@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="#00a65a">
     <ion-title>{{data.name}}</ion-title>
+    
+    <ion-icon name="cart" slot="end" color="white" style="margin-right: 25px; font-size: 32px;" (click)="addToCart(data.id)">Add to cart</ion-icon>
+  
   </ion-toolbar>
 </ion-header>
 

@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color="#00a65a">
     <ion-title>Compte</ion-title>
+    <ion-icon name="power" slot="end" color="danger" style="margin-right: 25px; font-size: 32px;" (click)="logout()"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -21,13 +22,6 @@
     <ion-col size="10" offset="1">
       Débit : {{Datas.userBalance.debit}} <br>
       Crédit : {{Datas.userBalance.credit}}
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col>
-      <br>
-      <ion-button color="danger" expand="block" (click)="logout()">se déconnecter</ion-button>
     </ion-col>
   </ion-row>
 

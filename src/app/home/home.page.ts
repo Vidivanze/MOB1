@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 export class HomePage implements OnInit {
 
   constructor(private router: Router, private auth: AuthService, private storage: Storage) {
+    //If user is connected
     this.storage.get('token').then(val => {
       if (val != null){
         console.log("ok")

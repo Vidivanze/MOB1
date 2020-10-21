@@ -15,6 +15,7 @@ export class CartPage implements OnInit {
   private cart = [];
   private cartProductList = [];
   private productToAdd;
+  public totalPrice = 0;
 
   constructor(private data: DataProvider, private storage: Storage, private toaster: ToastController) {
     
@@ -27,6 +28,7 @@ export class CartPage implements OnInit {
         if(val != null){
           this.cart = val;
           this.cart.forEach((element1) => {
+            this.totalPrice += element1['price'];
             this.cartProductList.forEach((element2, index2) => {
               if(element1.name == element2.name){
                 this.cartProductList.splice(index2, 1);
@@ -35,7 +37,7 @@ export class CartPage implements OnInit {
           })
         }
       });
-      
+
       this.sortProductListByName();
     });
   }
@@ -44,13 +46,23 @@ export class CartPage implements OnInit {
   addToCart(productId){  
     if(productId!= null){
       this.data.findProductById(productId).then((val) => {
-        this.productToAdd = val
+        this.productToAdd = val;
         this.cart.push(this.productToAdd);
+        this.totalPrice += this.productToAdd['price']
       });
 
       this.storage.set('cart', this.cart).then(() => {
         this.cartProductList = this.cartProductList.filter(({id}) => id != productId);
       })
+
+      //Notification
+      this.toaster.create({  
+        message: "Ajouté au panier !",
+        duration: 800,
+        color: 'success'
+      }).then(toast => {
+        toast.present()
+      });
 
     }
   }
@@ -60,8 +72,17 @@ export class CartPage implements OnInit {
       this.cart = this.cart.filter(({id}) => id != cartItem.id);
       this.cartProductList.push(cartItem);
       this.sortProductListByName();
-
+      this.totalPrice -= cartItem['price'];
       this.storage.set('cart', this.cart);
+
+      //Notification
+      this.toaster.create({  
+        message: "Supprimé du panier",
+        duration: 800,
+        color: 'danger'
+      }).then(toast => {
+        toast.present()
+      });
 
     }
   }

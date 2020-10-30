@@ -27,6 +27,7 @@ export class CartPage implements OnInit {
       this.storage.get('cart').then((val) => {
         if(val != null){
           this.cart = val;
+          console.log(this.cart)
           this.cart.forEach((element1) => {
             this.totalPrice += element1['price'];
             this.cartProductList.forEach((element2, index2) => {
@@ -44,7 +45,7 @@ export class CartPage implements OnInit {
 
 
   addToCart(productId){  
-    if(productId!= null){
+    if(productId != null){
       this.data.findProductById(productId).then((val) => {
         this.productToAdd = val;
         this.cart.push(this.productToAdd);
@@ -90,9 +91,19 @@ export class CartPage implements OnInit {
   dropCart(){
     this.storage.get('cart').then((val) => {
       if(val != null){ 
+        this.cart.splice(0, this.cartProductList.length);
         this.storage.remove('cart');
-        this.cart = null;
+        this.cartProductList.splice(0, this.cartProductList.length);
         
+        this.productToAdd = null;
+        this.totalPrice = 0;
+
+        //reset cartProductList
+        this.data.getProducts().then((prod) => {
+          this.cartProductList = prod;
+        })
+
+
         //Notification
         this.toaster.create({  
           message: "Le panier à été vidé",
@@ -102,14 +113,10 @@ export class CartPage implements OnInit {
           toast.present()
         });
 
-        this.ngOnInit();
+        
       }
     })
 
-  
-
-    
-     
   }
 
 

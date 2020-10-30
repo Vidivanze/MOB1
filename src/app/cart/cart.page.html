@@ -42,7 +42,7 @@
     <ion-card-content>
       <ion-grid>
         <ion-row>
-            <ion-label> {{ cartItem.price }} CHF par {{ cartItem.unit }}</ion-label>
+            <ion-label> {{ cartItem.price.toFixed(2) }} CHF par {{ cartItem.unit }}</ion-label>
         </ion-row>
         <ion-row class="ion-align-items-end">
           <ion-icon name="add" color="primary" fill="outline" (click)="quantity()"></ion-icon>
@@ -55,7 +55,7 @@
 
   <ion-grid>
     <ion-row class="ion-float-left">
-      <ion-label style="margin-left: 20px; padding: 18px 0px 30px 0px; font-size: 18px; font-weight: bold;">Total {{totalPrice}} CHF</ion-label>
+      <ion-label style="margin-left: 20px; padding: 18px 0px 30px 0px; font-size: 18px; font-weight: bold;">Total {{totalPrice.toFixed(2)}} CHF</ion-label>
     </ion-row>
   </ion-grid>
   

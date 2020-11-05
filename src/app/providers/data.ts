@@ -12,6 +12,7 @@ export class DataProvider {
   public products = [];
   public user = [];
   public userBalance;
+  public error;
 
   constructor(private http: HttpClient, private storage: Storage, private toaster: ToastController){}
 
@@ -24,7 +25,7 @@ export class DataProvider {
           resolve(this.products);
         },
         err => {
-          console.log('API failed with code '+err.status)
+          this.error = "Une erreure est survenue, veuillez vérifier votre connexion.";
         }
       )
     })

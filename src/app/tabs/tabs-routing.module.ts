@@ -1,3 +1,4 @@
+import { StockValidationPage } from './../stock-validation/stock-validation.page';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -34,6 +35,10 @@ const routes: Routes = [
       {
         path: 'login',
         loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule)
+      },
+      {
+        path: 'stock',
+        loadChildren: () => import('../stock-validation/stock-validation.module').then( m => m.StockValidationPageModule)
       }
     ]
   },

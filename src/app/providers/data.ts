@@ -7,7 +7,7 @@ import { ToastController } from '@ionic/angular';
 @Injectable()
 export class DataProvider {
   
-  private apiurl = "http://127.0.0.1:8000/api";
+  public apiurl = "http://127.0.0.1:8000/api";
 
   public products = [];
   public user = [];
@@ -50,7 +50,6 @@ export class DataProvider {
       this.http.get(this.apiurl+"/me").subscribe(
         response => {
           this.user = response['data'];
-          console.log(this.user);
           resolve(this.user);
         },
         err => {
